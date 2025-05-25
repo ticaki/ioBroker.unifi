@@ -311,6 +311,7 @@ class Unifi extends utils.Adapter {
                                     sslverify: !this.settings.ignoreSSLErrors
                                 });
                                 await this.controllers[site].login();
+                                await this.delay(1000); // wait 1 second to avoid rate limiting
                             }
                         }
 
@@ -506,7 +507,7 @@ class Unifi extends utils.Adapter {
                         return item;
                     }
                 });
-            
+
                 this.log.silly(`processClients: filtered data: ${JSON.stringify(siteData)}`);
 
                 if (siteData.length > 0) {
@@ -515,7 +516,7 @@ class Unifi extends utils.Adapter {
             }
         }
     }
-    
+
     /**
      * Function to identify blocked clients and set the correct state
      * @param {Object} site
